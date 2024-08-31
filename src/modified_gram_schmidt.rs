@@ -7,7 +7,7 @@ The Gram-Schmidt method is a method for orthonormalising a set of vectors. see:
 The MGS method improves the orthogonality loss due to the finite numerical precision
 on computers.
  */
-use nalgebra::{DMatrix, DVector, DVectorSlice};
+use nalgebra::{DMatrix, DVector, DVectorView};
 
 pub struct MGS {
     pub basis: DMatrix<f64>,
@@ -29,7 +29,7 @@ impl MGS {
     }
 
     // Project
-    fn project(v1: &DVectorSlice<f64>, v2: &DVectorSlice<f64>) -> DVector<f64> {
+    fn project(v1: &DVectorView<f64>, v2: &DVectorView<f64>) -> DVector<f64> {
         let magnitud = v1.dot(&v2) / v1.dot(&v1);
         v1 * magnitud
     }

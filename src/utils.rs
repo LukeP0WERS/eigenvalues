@@ -8,7 +8,7 @@ use nalgebra as na;
 
 use approx::relative_eq;
 use na::linalg::SymmetricEigen;
-use na::Dynamic;
+use na::Dyn;
 use na::{DMatrix, DVector};
 
 /// Generate a random highly diagonal symmetric matrix
@@ -44,9 +44,9 @@ pub fn generate_random_sparse_symmetric(dim: usize, lim: usize, sparsity: f64) -
 
 /// Sort the eigenvalues and their corresponding eigenvectors in ascending order
 pub fn sort_eigenpairs(
-    eig: SymmetricEigen<f64, Dynamic>,
+    eig: SymmetricEigen<f64, Dyn>,
     ascending: bool,
-) -> SymmetricEigen<f64, Dynamic> {
+) -> SymmetricEigen<f64, Dyn> {
     // Sort the eigenvalues
     let mut vs: Vec<(f64, usize)> = eig
         .eigenvalues
@@ -85,7 +85,7 @@ pub fn sort_vector<T: PartialOrd>(vs: &mut Vec<T>, ascending: bool) {
 }
 
 pub fn test_eigenpairs(
-    reference: &na::linalg::SymmetricEigen<f64, na::Dynamic>,
+    reference: &na::linalg::SymmetricEigen<f64, na::Dyn>,
     eigenpair: (na::DVector<f64>, na::DMatrix<f64>),
     number: usize,
 ) {

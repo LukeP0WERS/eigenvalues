@@ -8,15 +8,15 @@ You can use the algorithms for other matrix representations (e.g. matrix-free)
 by providing your own implementation of the **Matrixoperations** trait.
 
 */
-use nalgebra::{DMatrix, DMatrixSlice, DVector, DVectorSlice};
+use nalgebra::{DMatrix, DMatrixView, DVector, DVectorView};
 use std::clone::Clone;
 
 /// Trait containing the matrix free operations
 pub trait MatrixOperations: Clone  {
     /// Matrix vector multiplication
-    fn matrix_vector_prod(&self, vs: DVectorSlice<f64>) -> DVector<f64>;
+    fn matrix_vector_prod(&self, vs: DVectorView<f64>) -> DVector<f64>;
     /// Matrix matrix multiplication
-    fn matrix_matrix_prod(&self, mtx: DMatrixSlice<f64>) -> DMatrix<f64>;
+    fn matrix_matrix_prod(&self, mtx: DMatrixView<f64>) -> DMatrix<f64>;
     /// Get the matrix diagonal
     fn diagonal(&self) -> DVector<f64>;
     /// Set the matrix diagonal
@@ -28,10 +28,10 @@ pub trait MatrixOperations: Clone  {
 }
 
 impl MatrixOperations for DMatrix<f64> {
-    fn matrix_vector_prod(&self, vs: DVectorSlice<f64>) -> DVector<f64> {
+    fn matrix_vector_prod(&self, vs: DVectorView<f64>) -> DVector<f64> {
         self * vs
     }
-    fn matrix_matrix_prod(&self, mtx: DMatrixSlice<f64>) -> DMatrix<f64> {
+    fn matrix_matrix_prod(&self, mtx: DMatrixView<f64>) -> DMatrix<f64> {
         self * mtx
     }
     fn diagonal(&self) -> DVector<f64> {

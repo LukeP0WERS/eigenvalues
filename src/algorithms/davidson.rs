@@ -23,7 +23,7 @@ use crate::matrix_operations::MatrixOperations;
 use crate::utils;
 use crate::MGS;
 use nalgebra::linalg::SymmetricEigen;
-use nalgebra::{DMatrix, DVector, Dynamic};
+use nalgebra::{DMatrix, DVector, Dyn};
 use std::error;
 use std::f64;
 use std::fmt;
@@ -223,7 +223,7 @@ impl Davidson {
     fn compute_residues(
         ritz_vectors: &DMatrix<f64>,
         matrix_subspace: &DMatrix<f64>,
-        eig: &SymmetricEigen<f64, Dynamic>,
+        eig: &SymmetricEigen<f64, Dyn>,
     ) -> DMatrix<f64> {
         let dim_sub = eig.eigenvalues.nrows();
         let lambda = {
